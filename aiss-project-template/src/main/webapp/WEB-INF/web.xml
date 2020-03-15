@@ -8,7 +8,7 @@
 		<servlet-class>aiss.HelloWorldServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>HelloWorldServlet</servlet-name>
+		<servlet-name>HelloWorld</servlet-name>
 		<url-pattern>/info</url-pattern>
 	</servlet-mapping>
 	

@@ -18,7 +18,7 @@ public class HelloWorldServlet extends HttpServlet {
 		log.log(Level.FINE, "Processing GET request");
 		 
 		resp.setContentType("text/plain");
-		resp.getWriter().println("Hello World!");
-		
+		resp.getWriter().println("Este Mashup tiene como objetivo ser un buscador de videojuegos con acceso a toda la informacion sobre ellos");
+		resp.getWriter().println("con la meta de tener todo lo que busques en una misma web.");
 	}
 }
