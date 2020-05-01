@@ -13,9 +13,59 @@
 	</servlet-mapping>
 	
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-	
+	<servlet>
+		<description></description>
+		<display-name>SpotifySearchController</display-name>
+		<servlet-name>SpotifySearchController</servlet-name>
+		<servlet-class>aiss.controller.SpotifySearchController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SpotifySearchController</servlet-name>
+		<url-pattern>/SpotifySearchController</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>GenericAuthController</display-name>
+		<servlet-name>GenericAuthController</servlet-name>
+		<servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
+		<init-param>
+			<param-name>provider</param-name>
+			<param-value>Spotify</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GenericAuthController</servlet-name>
+		<url-pattern>/AuthController/Spotify</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<servlet-name>SpotifyOAuth2Callback</servlet-name>
+		<servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
+		<init-param>
+			<param-name>provider</param-name>
+			<param-value>Spotify</param-value>
+		</init-param>
+		<init-param>
+			<param-name>onSuccess</param-name>
+			<param-value>redirect:/index.jsp</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SpotifyOAuth2Callback</servlet-name>
+		<url-pattern>/oauth2callback/Spotify</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>YoutubeController</display-name>
+		<servlet-name>YoutubeController</servlet-name>
+		<servlet-class>aiss.controller.YoutubeController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>YoutubeController</servlet-name>
+		<url-pattern>/YoutubeController</url-pattern>
+	</servlet-mapping>
 	<!--  OAUTH SERVLETS 
   
   	For each OAuth 2.0 service, you need to create two servlets: one for the initiation 

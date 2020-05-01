@@ -1,4 +1,13 @@
 {
+	"GoogleDrive": {
+		"tokenUrl": "https://www.googleapis.com/oauth2/v4/token",
+		"clientId": "244043196985-8pgcnp42ti2i3ft4om4mhf05i3093ba8.apps.googleusercontent.com",
+		"clientSecret": "AIzaSyCV1mXFxt2aVXV4yU3fgZAM4bzuB_dHEis",
+		"authorizationFormUrl": " https://accounts.google.com/o/oauth2/v2/auth",
+		"scopes": [
+			"https://www.googleapis.com/auth/drive"
+		]
+	},
 	"Spotify": {
 		"tokenUrl": "https://accounts.spotify.com/api/token",
 		"clientId": "fc1d1612693f4f3c8310c6e72439e292",

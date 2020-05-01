@@ -1,5 +1,7 @@
 package aiss.model.resource;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.restlet.data.ChallengeResponse;
@@ -8,6 +10,8 @@ import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
 import aiss.model.spotify.search.Item;
+import aiss.model.spotify.search.Search;
+import aiss.model.spotify.track.Track;
 
 public class SpotifyResource {
 
@@ -20,13 +24,13 @@ public class SpotifyResource {
 		this.access_token = access_token;
 
 	}
-
+	//obtenemos los id de la busqueda realizada
 	public String getSearchTrackId(String busqueda) {
 		if (!busqueda.trim().isEmpty()) {
 			busqueda = busqueda.trim() + " Soundtrack";
 			String busquedaTratada = busqueda.replace(" ", "%20").toLowerCase();
 
-			String busquedatURL = baseURL + "/search?query=" + busquedaTratada + "&type=track";
+			String busquedatURL = baseURL + "/search?query=" + busquedaTratada + "&type=track&limit=1";
 			ClientResource cr = new ClientResource(busquedatURL);
 
 			ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
@@ -36,8 +40,10 @@ public class SpotifyResource {
 			log.info("Retrieving user profile");
 
 			try {
-				log.info("sdg");
-				return cr.get(Item.class).getId();
+				System.out.println(busquedatURL);
+				Search res = cr.get(Search.class);
+				String l = parseTrackId(res.getAdditionalProperties().get("tracks").toString());
+				return "https://open.spotify.com/embed/track/"+l;
 
 			} catch (ResourceException re) {
 				log.warning("Error when retrieving the search: " + cr.getResponse().getStatus());
@@ -49,6 +55,18 @@ public class SpotifyResource {
 			return null;
 		}
 
+	}
+	//obtiene el id de las canciones a partir del json pasado como parámetro
+	protected String parseTrackId(String s){
+		String[] trozos = s.split(",");
+		String res = "";
+		for (int i = 0; i < trozos.length; i++) {
+			if(trozos[i].contains("uri=spotify:track:")) {
+				res = (trozos[i].replace("uri=spotify:track:", "").replace("}", "").trim());
+				break;
+			}
+		}
+		return res;
 	}
 
 }
